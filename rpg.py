@@ -13,17 +13,14 @@ while classe != 'Guerreiro' and classe != 'Mago' and classe != 'Ladino':
 #DEFINIR VALORES DE VIDA E MANA COM BASE NA CLASSE
 if classe == 'Guerreiro':
     vidaMax = 250
-    manaMax = 50
     defesaFisica = 0.8
     defesaMagica = 0.8
 elif classe == 'Mago':
     vidaMax = 100
-    manaMax = 200
     defesaFisica = 0.95
     defesaMagica = 0.95
 elif classe == 'Ladino':
     vidaMax = 150
-    manaMax = 100
     defesaFisica = 0.9
     defesaMagica = 0.9
 
@@ -82,13 +79,13 @@ elif classe == 'Ladino' and habilidadeClasse == '3':
 equipamento = 'undefined'#faz com que inicialmente seja indefinido a variável habilidadeClasse
 if classe == 'Guerreiro':
     while equipamento != '1' and equipamento != '2': 
-        equipamento = input("Escolha seu equipamento, digite 1 para espada longa (30 de dano físico), digite 2 para espada e escudo (15 de dano físico e sofre 20% menos de dano): ")
+        equipamento = input("Escolha seu equipamento, digite 1 para espada longa (40 de dano físico), digite 2 para espada e escudo (25 de dano físico e sofre 20% menos de dano): ")
 elif classe == 'Mago':
     while equipamento != '1' and equipamento != '2': 
-        equipamento = input("Escolha seu equipamento, digite 1 para cajado mágico (30 de dano mágico), digite 2 para adaga mágica (15 de dano mágico e 10 de dano físico): ")
+        equipamento = input("Escolha seu equipamento, digite 1 para cajado mágico (40 de dano mágico), digite 2 para adaga mágica (25 de dano mágico e 15 de dano físico): ")
 elif classe == 'Ladino':
     while equipamento != '1' and equipamento != '2': 
-        equipamento = input("Escolha seu equipamento, digite 1 rapieira (20 de dano físico e 30% de chance de duplicar o dano), digite 2 para bastão (10 de dano físico e 1/4 de chance de atordoar o inimigo por 1 turno): ")
+        equipamento = input("Escolha seu equipamento, digite 1 rapieira (30 de dano físico e 1/4 de chance de duplicar o dano), digite 2 para bastão (20 de dano físico e 1/4 de chance de atordoar o inimigo por 1 turno): ")
 
 sleep(delay)#delay 
 
@@ -96,29 +93,50 @@ sleep(delay)#delay
 #GUERREIRO
 if classe == 'Guerreiro' and equipamento == '1':
     equipamento = 'espada longa'
-    print(f'Seu equipamento é {equipamento}') 
+    danoFisico = 40
+    danoMagico = 0
 elif classe == 'Guerreiro' and equipamento == '2':
     equipamento = 'espada e escudo'
-    print(f'Seu equipamento é {equipamento}') 
+    danoFisico = 25
+    danoMagico = 0
+    defesaFisica = defesaFisica - 0.2
+    defesaMagica = defesaMagica - 0.2
 #MAGO
 elif classe == 'Mago' and equipamento == '1':
     equipamento = 'cajado mágico'
-    print(f'Seu equipamento é {equipamento}') 
+    danoFisico = 0
+    danoMagico = 40
 elif classe == 'Mago' and equipamento == '2':
     equipamento = 'adaga mágica'
-    print(f'Seu equipamento é {equipamento}')
+    danoFisico = 15
+    danoMagico = 25
 #LADINO
 elif classe == 'Ladino' and equipamento == '1':
     equipamento = 'rapieira'
-    print(f'Seu equipamento é {equipamento}') 
+    chanceDeCritar = random.randint(1,4)
+    if chanceDeCritar == 1: #if para verificar se o ataque foi crítico
+       danoFisico = 60
+       danoMagico = 0 
+    else:
+        danoFisico = 30
+        danoMagico = 0 
 elif classe == 'Ladino' and equipamento == '2':
     equipamento = 'bastão'
-    print(f'Seu equipamento é {equipamento}')
+    chanceAtordoar = random.randint(1,4)
+    if chanceAtordoar == 1: #if para verificar se o ataque vai atordoar
+       danoFisico = 20
+       danoMagico = 0 
+       atordoamento = '1'
+    else:
+        danoFisico = 20
+        danoMagico = 0 
+        atordoamento = '0'
+print(f'Seu equipamento é {equipamento}')
 
 sleep(delay2)#delay
 
 #FALAR TODOS OS ATRIBUTOS------------------------------------------------------------------------------------------------------------------------------------------------
-print(f'Sua classe é {classe} sua vida é {vidaMax} e sua mana é {manaMax} sua habilidade é {habilidadeClasse} e seu equipamento é {equipamento}')
+print(f'Sua classe é {classe} sua vida é {vidaMax} sua habilidade é {habilidadeClasse} e seu equipamento é {equipamento}')
 
 sleep(delay2)#delay
 
@@ -158,3 +176,10 @@ if inimigo == 4:
     defesaMagicaInimigo = 0.8
     habilidadeInimigo = 'Petrificar' #pula um turno do usuário
 print(f'Seu inimigo é {inimigo} com vida de {vidaInimigo} dano de {danoInimigo} e sua habilidade é {habilidadeInimigo}') #falar o inimigo e seus atributos
+
+#BATALHA------------------------------------------------------------------------------------------------------------------------------------------------
+turno = 1 #define o turno inicial como 1
+while vidaInimigo >= 0 or vidaMax >= 0:
+    
+    print(f'Fim do {turno} turno!')
+    turno = turno + 1
