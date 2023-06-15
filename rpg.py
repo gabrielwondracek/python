@@ -1,3 +1,4 @@
+import random #import para randomizar números
 from time import sleep #import para delay
 delay = 1 #definição do tempo de delay para 1 segundos
 delay2 = 2 #definição do tempo de delay para 2 segundos
@@ -11,14 +12,20 @@ while classe != 'Guerreiro' and classe != 'Mago' and classe != 'Ladino':
 
 #DEFINIR VALORES DE VIDA E MANA COM BASE NA CLASSE
 if classe == 'Guerreiro':
-    vidaMax = 200
+    vidaMax = 250
     manaMax = 50
+    defesaFisica = 0.8
+    defesaMagica = 0.8
 elif classe == 'Mago':
-    vidaMax = 50
-    manaMax = 200
-elif classe == 'Ladino':
     vidaMax = 100
+    manaMax = 200
+    defesaFisica = 0.95
+    defesaMagica = 0.95
+elif classe == 'Ladino':
+    vidaMax = 150
     manaMax = 100
+    defesaFisica = 0.9
+    defesaMagica = 0.9
 
 #MOSTRAR A CLASSE E OS VALORES  
 print(f'Sua classe é {classe} sua vida é {vidaMax} e sua mana é {manaMax}')
@@ -112,3 +119,42 @@ sleep(delay2)#delay
 
 #FALAR TODOS OS ATRIBUTOS------------------------------------------------------------------------------------------------------------------------------------------------
 print(f'Sua classe é {classe} sua vida é {vidaMax} e sua mana é {manaMax} sua habilidade é {habilidadeClasse} e seu equipamento é {equipamento}')
+
+sleep(delay2)#delay
+
+#ESCOLHA ALEATÓRIA DO INIMIGO--------------------------------------------------------------------------------------------------------------------------------------------
+inimigo = random.randint(1,4) #faz a variável inimigo ter um valor entre 1 a 4
+
+#Goliath
+if inimigo == 1:
+    inimigo = 'Goliath'
+    vidaInimigo = random.randint(350,800)
+    danoInimigo = random.randint(5,10)
+    defesaFisicaInimigo = 0.9
+    defesaMagicaInimigo = 0.9
+    habilidadeInimigo = 'Dureza' #sofre 55% menos dano por 3 turnos
+#Caçador de mago
+if inimigo == 2:
+    inimigo = 'Caçador de mago'
+    vidaInimigo = random.randint(30,70)
+    danoInimigo = random.randint(10,35)
+    defesaFisicaInimigo = 1.2
+    defesaMagicaInimigo = 0.1
+    habilidadeInimigo = 'Caçar magia' #o usuário não poderá mais utlizar habilidade
+#Mago antigo
+if inimigo == 3:
+    inimigo = 'Mago antigo'
+    vidaInimigo = random.randint(15,60)
+    danoInimigo = random.randint(25,30)
+    defesaFisicaInimigo = 0.2
+    defesaMagicaInimigo = 1.2
+    habilidadeInimigo = 'Bola elétrica' #causa 50 de dano e ignora a defesa mágica
+#Guerreiro de pedra
+if inimigo == 4:
+    inimigo = 'Guerreiro de pedra'
+    vidaInimigo = random.randint(115,600)
+    danoInimigo = random.randint(7,15)
+    defesaFisicaInimigo = 0.8
+    defesaMagicaInimigo = 0.8
+    habilidadeInimigo = 'Petrificar' #pula um turno do usuário
+print(f'Seu inimigo é {inimigo} com vida de {vidaInimigo} dano de {danoInimigo} e sua habilidade é {habilidadeInimigo}') #falar o inimigo e seus atributos
