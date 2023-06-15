@@ -1,5 +1,6 @@
 from time import sleep #import para delay
-delay = 1 #definição do tempo de delay
+delay = 1 #definição do tempo de delay para 1 segundos
+delay2 = 2 #definição do tempo de delay para 2 segundos
 
 #ESCOLHA DA CLASSE-------------------------------------------------------------------------------------------------------------------------------------------------------------
 classe = 'undefined'#faz com que inicialmente seja indefinido a variável classe
@@ -69,3 +70,45 @@ elif classe == 'Ladino' and habilidadeClasse == '2':
 elif classe == 'Ladino' and habilidadeClasse == '3':
     habilidadeClasse = 'ataque surpresa'
     print(f'Sua habilidade é {habilidadeClasse}')
+
+#ESCOLHA DO EQUIPAMENTO------------------------------------------------------------------------------------------------------------------------------------------------
+equipamento = 'undefined'#faz com que inicialmente seja indefinido a variável habilidadeClasse
+if classe == 'Guerreiro':
+    while equipamento != '1' and equipamento != '2': 
+        equipamento = input("Escolha seu equipamento, digite 1 para espada longa (30 de dano físico), digite 2 para espada e escudo (15 de dano físico e sofre 20% menos de dano): ")
+elif classe == 'Mago':
+    while equipamento != '1' and equipamento != '2': 
+        equipamento = input("Escolha seu equipamento, digite 1 para cajado mágico (30 de dano mágico), digite 2 para adaga mágica (15 de dano mágico e 10 de dano físico): ")
+elif classe == 'Ladino':
+    while equipamento != '1' and equipamento != '2': 
+        equipamento = input("Escolha seu equipamento, digite 1 rapieira (20 de dano físico e 30% de chance de duplicar o dano), digite 2 para bastão (10 de dano físico e 1/4 de chance de atordoar o inimigo por 1 turno): ")
+
+sleep(delay)#delay 
+
+#MOSTRAR AO USUÁRIO O EQUIPAMENTO ESCOLHIDO
+#GUERREIRO
+if classe == 'Guerreiro' and equipamento == '1':
+    equipamento = 'espada longa'
+    print(f'Seu equipamento é {equipamento}') 
+elif classe == 'Guerreiro' and equipamento == '2':
+    equipamento = 'espada e escudo'
+    print(f'Seu equipamento é {equipamento}') 
+#MAGO
+elif classe == 'Mago' and equipamento == '1':
+    equipamento = 'cajado mágico'
+    print(f'Seu equipamento é {equipamento}') 
+elif classe == 'Mago' and equipamento == '2':
+    equipamento = 'adaga mágica'
+    print(f'Seu equipamento é {equipamento}')
+#LADINO
+elif classe == 'Ladino' and equipamento == '1':
+    equipamento = 'rapieira'
+    print(f'Seu equipamento é {equipamento}') 
+elif classe == 'Ladino' and equipamento == '2':
+    equipamento = 'bastão'
+    print(f'Seu equipamento é {equipamento}')
+
+sleep(delay2)#delay
+
+#FALAR TODOS OS ATRIBUTOS------------------------------------------------------------------------------------------------------------------------------------------------
+print(f'Sua classe é {classe} sua vida é {vidaMax} e sua mana é {manaMax} sua habilidade é {habilidadeClasse} e seu equipamento é {equipamento}')
