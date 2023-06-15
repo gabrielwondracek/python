@@ -113,24 +113,13 @@ elif classe == 'Mago' and equipamento == '2':
 #LADINO
 elif classe == 'Ladino' and equipamento == '1':
     equipamento = 'rapieira'
-    chanceDeCritar = random.randint(1,4)
-    if chanceDeCritar == 1: #if para verificar se o ataque foi crítico
-       danoFisico = 60
-       danoMagico = 0 
-    else:
-        danoFisico = 30
-        danoMagico = 0 
+    danoFisico = 30
+    danoMagico = 0 
 elif classe == 'Ladino' and equipamento == '2':
     equipamento = 'bastão'
-    chanceAtordoar = random.randint(1,4)
-    if chanceAtordoar == 1: #if para verificar se o ataque vai atordoar
-       danoFisico = 20
-       danoMagico = 0 
-       atordoamento = '1'
-    else:
-        danoFisico = 20
-        danoMagico = 0 
-        atordoamento = '0'
+    danoFisico = 20
+    danoMagico = 0 
+    atordoamento = '0'
 print(f'Seu equipamento é {equipamento}')
 
 sleep(delay2)#delay
@@ -180,6 +169,24 @@ print(f'Seu inimigo é {inimigo} com vida de {vidaInimigo} dano de {danoInimigo}
 #BATALHA------------------------------------------------------------------------------------------------------------------------------------------------
 turno = 1 #define o turno inicial como 1
 while vidaInimigo >= 0 or vidaMax >= 0:
+
+    chanceAtordoar = random.randint(1,4)
+    if chanceAtordoar == 1: #if para verificar se o ataque vai atordoar
+       danoFisico = 20
+       danoMagico = 0 
+       atordoamento = '1'
+    else:
+        danoFisico = 20
+        danoMagico = 0 
+        atordoamento = '0'
+
+    chanceDeCritar = random.randint(1,4)
+    if chanceDeCritar == 1: #if para verificar se o ataque foi crítico
+       danoFisico = 60
+       danoMagico = 0 
+    else:
+        danoFisico = 30
+        danoMagico = 0 
     
     print(f'Fim do {turno} turno!')
     turno = turno + 1
