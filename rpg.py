@@ -1,7 +1,8 @@
 #ESCOLHA DA CLASSE
 classe = input("escolha sua classe: Guerreiro, Mago ou Ladino (escreva igual com a primeira letra maiúscula): ")
-    #while classe != 'Guerreiro' or 'Mago' or 'Ladino': <<NÃO FUNCIONAL
-    #classe = input("escolha sua classe: Guerreiro, Mago ou Ladino (escreva igual com a primeira letra maiúscula): ") <<NÃO FUNCIONAL
+
+while classe != 'Guerreiro' and classe != 'Mago' and classe != 'Ladino': 
+    classe = input("escolha sua classe: Guerreiro, Mago ou Ladino (escreva igual com a primeira letra maiúscula): ") 
 
 #DEFINIR VALORES DE VIDA E MANA COM BASE NA CLASSE
 if classe == 'Guerreiro':
@@ -16,6 +17,3 @@ elif classe == 'Ladino':
 
 #MOSTRAR A CLASSE E OS VALORES  
 print(f'Sua classe é {classe} sua vida é {vidaMax} e sua mana é {manaMax}')
-
-
-
