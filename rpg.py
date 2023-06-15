@@ -2,10 +2,11 @@ from time import sleep #import para delay
 delay = 1 #definição do tempo de delay
 
 #ESCOLHA DA CLASSE-------------------------------------------------------------------------------------------------------------------------------------------------------------
-classe = input("escolha sua classe: Guerreiro, Mago ou Ladino (escreva igual com a primeira letra maiúscula): ")
+classe = 'undefined'#faz com que inicialmente seja indefinido a variável classe
+confirmacaoClasse = 'undefined'#faz com que inicialmente seja indefinido a variável confirmacaoClasse
 
 while classe != 'Guerreiro' and classe != 'Mago' and classe != 'Ladino': 
-    classe = input("escolha sua classe: Guerreiro, Mago ou Ladino (escreva igual com a primeira letra maiúscula): ") 
+    classe = input("escolha sua classe: Guerreiro, Mago ou Ladino (escreva igual com a primeira letra maiúscula): ")
 
 #DEFINIR VALORES DE VIDA E MANA COM BASE NA CLASSE
 if classe == 'Guerreiro':
