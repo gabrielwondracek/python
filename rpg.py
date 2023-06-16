@@ -2,6 +2,7 @@ import random #import para randomizar números
 from time import sleep #import para delay
 delay = 1 #definição do tempo de delay para 1 segundos
 delay2 = 2 #definição do tempo de delay para 2 segundos
+delay3 = 3 #definição do tempo de delay para 3 segundos
 
 #ESCOLHA DA CLASSE-------------------------------------------------------------------------------------------------------------------------------------------------------------
 classe = 'undefined'#faz com que inicialmente seja indefinido a variável classe
@@ -25,7 +26,7 @@ elif classe == 'Ladino':
     defesaMagica = 0.9
 
 #MOSTRAR A CLASSE E OS VALORES  
-print(f'Sua classe é {classe} sua vida é {vidaMax} e sua mana é {manaMax}')
+print(f'Sua classe é {classe} e sua vida é {vidaMax}')
 
 sleep(delay)#delay
 
@@ -79,7 +80,7 @@ elif classe == 'Ladino' and habilidadeClasse == '3':
 equipamento = 'undefined'#faz com que inicialmente seja indefinido a variável habilidadeClasse
 if classe == 'Guerreiro':
     while equipamento != '1' and equipamento != '2': 
-        equipamento = input("Escolha seu equipamento, digite 1 para espada longa (40 de dano físico), digite 2 para espada e escudo (25 de dano físico e sofre 20% menos de dano): ")
+        equipamento = input("Escolha seu equipamento, digite 1 para espada longa (40 de dano físico), digite 2 para espada e escudo (25 de dano físico e sofre 10% menos de dano): ")
 elif classe == 'Mago':
     while equipamento != '1' and equipamento != '2': 
         equipamento = input("Escolha seu equipamento, digite 1 para cajado mágico (40 de dano mágico), digite 2 para adaga mágica (25 de dano mágico e 15 de dano físico): ")
@@ -95,29 +96,34 @@ if classe == 'Guerreiro' and equipamento == '1':
     equipamento = 'espada longa'
     danoFisico = 40
     danoMagico = 0
+    atordoamento = '0'
 elif classe == 'Guerreiro' and equipamento == '2':
     equipamento = 'espada e escudo'
     danoFisico = 25
     danoMagico = 0
-    defesaFisica = defesaFisica - 0.2
-    defesaMagica = defesaMagica - 0.2
+    defesaFisica = defesaFisica - 0.1
+    defesaMagica = defesaMagica - 0.1
+    atordoamento = '0'
 #MAGO
 elif classe == 'Mago' and equipamento == '1':
     equipamento = 'cajado mágico'
     danoFisico = 0
     danoMagico = 40
+    atordoamento = '0'
 elif classe == 'Mago' and equipamento == '2':
     equipamento = 'adaga mágica'
     danoFisico = 15
     danoMagico = 25
+    atordoamento = '0'
 #LADINO
 elif classe == 'Ladino' and equipamento == '1':
     equipamento = 'rapieira'
     danoFisico = 30
-    danoMagico = 0 
+    danoMagico = 0
+    atordoamento = '0'
 elif classe == 'Ladino' and equipamento == '2':
     equipamento = 'bastão'
-    danoFisico = 20
+    danoFisico = 25
     danoMagico = 0 
     atordoamento = '0'
 print(f'Seu equipamento é {equipamento}')
@@ -135,58 +141,83 @@ inimigo = random.randint(1,4) #faz a variável inimigo ter um valor entre 1 a 4
 #Goliath
 if inimigo == 1:
     inimigo = 'Goliath'
-    vidaInimigo = random.randint(350,800)
-    danoInimigo = random.randint(5,10)
+    vidaInimigo = random.randint(400,800)
+    danoFisicoInimigo = random.randint(6,10)
+    danoMagicoInimigo = 0
     defesaFisicaInimigo = 0.9
     defesaMagicaInimigo = 0.9
     habilidadeInimigo = 'Dureza' #sofre 55% menos dano por 3 turnos
 #Caçador de mago
 if inimigo == 2:
     inimigo = 'Caçador de mago'
-    vidaInimigo = random.randint(30,70)
-    danoInimigo = random.randint(10,35)
+    vidaInimigo = random.randint(90,120)
+    danoFisicoInimigo = random.randint(10,35)
+    danoMagicoInimigo = 0
     defesaFisicaInimigo = 1.2
     defesaMagicaInimigo = 0.1
     habilidadeInimigo = 'Caçar magia' #o usuário não poderá mais utlizar habilidade
 #Mago antigo
 if inimigo == 3:
     inimigo = 'Mago antigo'
-    vidaInimigo = random.randint(15,60)
-    danoInimigo = random.randint(25,30)
+    vidaInimigo = random.randint(75,100)
+    danoFisicoInimigo = 0
+    danoMagicoInimigo = random.randint(25,30)
     defesaFisicaInimigo = 0.2
     defesaMagicaInimigo = 1.2
     habilidadeInimigo = 'Bola elétrica' #causa 50 de dano e ignora a defesa mágica
 #Guerreiro de pedra
 if inimigo == 4:
     inimigo = 'Guerreiro de pedra'
-    vidaInimigo = random.randint(115,600)
-    danoInimigo = random.randint(7,15)
+    vidaInimigo = random.randint(215,600)
+    danoFisicoInimigo = random.randint(7,15)
+    danoMagicoInimigo = 0
     defesaFisicaInimigo = 0.8
     defesaMagicaInimigo = 0.8
     habilidadeInimigo = 'Petrificar' #pula um turno do usuário
-print(f'Seu inimigo é {inimigo} com vida de {vidaInimigo} dano de {danoInimigo} e sua habilidade é {habilidadeInimigo}') #falar o inimigo e seus atributos
+print(f'Seu inimigo é {inimigo} com vida de {vidaInimigo} dano físico de {danoFisicoInimigo} dano mágico de {danoMagicoInimigo} e sua habilidade é {habilidadeInimigo}') #falar o inimigo e seus atributos
+
+sleep(delay3)#delay
 
 #BATALHA------------------------------------------------------------------------------------------------------------------------------------------------
 turno = 1 #define o turno inicial como 1
-while vidaInimigo >= 0 or vidaMax >= 0:
+print("Começo da batalha!")
+while vidaInimigo >= 0 and vidaMax >= 0:
+    if equipamento == 'bastão':
+        chanceAtordoar = random.randint(1,4)
+        if chanceAtordoar == 1: #if para verificar se o ataque vai atordoar
+            danoFisico = 25
+            danoMagico = 0 
+            atordoamento = '1'
+            print("ATORDOAMENTO!!!!!!!!")
+        else:
+            danoFisico = 25
+            danoMagico = 0 
+            atordoamento = '0'
 
-    chanceAtordoar = random.randint(1,4)
-    if chanceAtordoar == 1: #if para verificar se o ataque vai atordoar
-       danoFisico = 20
-       danoMagico = 0 
-       atordoamento = '1'
-    else:
-        danoFisico = 20
-        danoMagico = 0 
-        atordoamento = '0'
-
-    chanceDeCritar = random.randint(1,4)
-    if chanceDeCritar == 1: #if para verificar se o ataque foi crítico
-       danoFisico = 60
-       danoMagico = 0 
-    else:
-        danoFisico = 30
-        danoMagico = 0 
+    if equipamento == 'rapieira':
+        chanceDeCritar = random.randint(1,4)
+        if chanceDeCritar == 1: #if para verificar se o ataque foi crítico
+            danoFisico = 60
+            danoMagico = 0 
+            print("CRÍTICO!!!!!!!!")
+        else:
+            danoFisico = 30
+            danoMagico = 0 
     
+    vidaInimigo = (vidaInimigo - (danoFisico * defesaFisicaInimigo)) - danoMagico * defesaMagicaInimigo
+    print(f'Vida atualmente do inimigo é {vidaInimigo:,.1f}') #falar ao usuário sua vida máxima
+
+    if atordoamento == '0':
+        vidaMax = (vidaMax - (danoFisicoInimigo * defesaFisica)) - danoMagicoInimigo * defesaMagica
+        print(f'Sua vida atualmente é {vidaMax:,.1f}') #falar ao usuário sua vida máxima
+
+    sleep(delay2)#delay
+
+    #contador de turno
     print(f'Fim do {turno} turno!')
     turno = turno + 1
+
+if vidaMax > vidaInimigo:
+    print("Você ganhou!")
+else:
+    print("Você perdeu!")
