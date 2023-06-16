@@ -180,18 +180,17 @@ sleep(delay3)#delay
 
 #BATALHA------------------------------------------------------------------------------------------------------------------------------------------------
 turno = 1 #define o turno inicial como 1
+acao = 'undefined' #define a variável acao como indefinido
 print("Começo da batalha!")
 while vidaInimigo >= 0 and vidaMax >= 0:
+    bloqueio = '0'#define o bloqueio como 0
+
     if equipamento == 'bastão':
         chanceAtordoar = random.randint(1,4)
-        if chanceAtordoar == 1: #if para verificar se o ataque vai atordoar
-            danoFisico = 25
-            danoMagico = 0 
+        if chanceAtordoar == 1: #if para verificar se o ataque vai atordoar 
             atordoamento = '1'
             print("ATORDOAMENTO!!!!!!!!")
         else:
-            danoFisico = 25
-            danoMagico = 0 
             atordoamento = '0'
 
     if equipamento == 'rapieira':
@@ -203,19 +202,46 @@ while vidaInimigo >= 0 and vidaMax >= 0:
         else:
             danoFisico = 30
             danoMagico = 0 
-    
-    vidaInimigo = (vidaInimigo - (danoFisico * defesaFisicaInimigo)) - danoMagico * defesaMagicaInimigo
-    print(f'Vida atualmente do inimigo é {vidaInimigo:,.1f}') #falar ao usuário sua vida máxima
 
-    if atordoamento == '0':
+    while acao != '1' and acao != '2' and acao != '3': 
+        acao = input("Escolha sua ação: 1 para bloqueio 2 para ataque rápido 3 para ataque carregado): ")
+
+    if acao == '1':
+        chanceBloqueio = random.randint(1,2)
+        #BLOQUEIO
+        if chanceBloqueio == 1:
+            bloqueio = '1'
+            print("VOCÊ BLOQUEOU O ATAQUE!!!!!!!")
+        else:
+            print("BLOQUEIO FALHOU")
+    #ATAQUE RÁPIDO
+    elif acao == '2':
+        vidaInimigo = (vidaInimigo - (danoFisico * defesaFisicaInimigo)) - danoMagico * defesaMagicaInimigo
+        print("ATAQUE RÁPIDO!!!!") 
+    #ATAQUE CARREGADO
+    elif acao == '3':
+        chanceAcertoCarregado = random.randint(1,3)
+        if chanceAcertoCarregado == 1:
+            vidaInimigo = (vidaInimigo - ((danoFisico * 2) * defesaFisicaInimigo)) - (danoMagico * 2) * defesaMagicaInimigo
+            print("ATAQUE CARREGADO ACERTOU!!!!")
+        else:
+            print("ATAQUE CARREGADO FALHOU!!!!")
+
+    if chanceDeCritar == 1: #if para falar ao usuário de rapieira se critou ou não
+            print("CRÍTICO!!!!!!!!")
+
+    print(f'Vida atualmente do inimigo é {vidaInimigo:,.1f}') #falar ao usuário vida atual do inimigo
+
+    if atordoamento == '0' and bloqueio != '1':
         vidaMax = (vidaMax - (danoFisicoInimigo * defesaFisica)) - danoMagicoInimigo * defesaMagica
-        print(f'Sua vida atualmente é {vidaMax:,.1f}') #falar ao usuário sua vida máxima
+        print(f'Sua vida atualmente é {vidaMax:,.1f}') #falar ao usuário sua vida atual
 
     sleep(delay2)#delay
 
     #contador de turno
     print(f'Fim do {turno} turno!')
     turno = turno + 1
+    acao = 'undefined' #define a variável acao como indefinido
 
 if vidaMax > vidaInimigo:
     print("Você ganhou!")
