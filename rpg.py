@@ -34,13 +34,13 @@ sleep(delay)#delay
 habilidadeClasse = 'undefined'#faz com que inicialmente seja indefinido a variável habilidadeClasse
 if classe == 'Guerreiro':
     while habilidadeClasse != '1' and habilidadeClasse != '2' and habilidadeClasse != '3': 
-        habilidadeClasse = input("Escolha sua habilidade de classe, digite 1 para fúria (aumento de vida e dano em 30% por e rodadas), digite 2 para golpe desleal (30 de dano físico) ou digite 3 para revigorância (recupera instantaneamente 50 de vida, ultrapassando o valor base): ")
+        habilidadeClasse = input("Escolha sua habilidade de classe, digite 1 para fúria (aumento de dano em 50% por 3 rodadas), digite 2 para golpe desleal (50 de dano real) ou digite 3 para revigorância (recupera instantaneamente 40 de vida, ultrapassando o valor base): ")
 elif classe == 'Mago':
     while habilidadeClasse != '1' and habilidadeClasse != '2' and habilidadeClasse != '3': 
-        habilidadeClasse = input("Escolha sua habilidade de classe, digite 1 para bola de fogo (30 de dano mágico), digite 2 para raio (10 de dano mágico e ganha mais um turno) ou digite 3 para véu mágico (sofre 30% menos de dano por 3 rodadas): ")
+        habilidadeClasse = input("Escolha sua habilidade de classe, digite 1 para bola de fogo (100 de dano mágico), digite 2 para raio (40 de dano real e atordoa o inimigo) ou digite 3 para véu mágico (sofre 30% menos de dano por 3 rodadas): ")
 elif classe == 'Ladino':
     while habilidadeClasse != '1' and habilidadeClasse != '2' and habilidadeClasse != '3': 
-        habilidadeClasse = input("Escolha sua habilidade de classe, digite 1 para roubo (roube 20 de vida do adversário), digite 2 para astúcia (por 5 turnos você terá 1/4 de chance de desviar do ataque) ou digite 3 para ataque surpresa (30 de dano físico): ")
+        habilidadeClasse = input("Escolha sua habilidade de classe, digite 1 para roubo (roube 20 de vida do adversário), digite 2 para astúcia (por 3 turnos você terá 1/4 de chance de desviar do ataque) ou digite 3 para ataque surpresa (60 de dano real): ")
 
 sleep(delay)#delay    
 
@@ -181,9 +181,50 @@ sleep(delay3)#delay
 #BATALHA------------------------------------------------------------------------------------------------------------------------------------------------
 turno = 1 #define o turno inicial como 1
 acao = 'undefined' #define a variável acao como indefinido
+usoHabilidade = 'undefined' #define a variável usoHabilidade como indefinido
+chanceDeCritar = 0 #define a variável chanceDeCritar como indefinido
+contadorHabilidade = 5
 print("Começo da batalha!")
 while vidaInimigo >= 0 and vidaMax >= 0:
     bloqueio = '0'#define o bloqueio como 0
+
+    if contadorHabilidade == 5:
+        while usoHabilidade != '1' and usoHabilidade != '2':
+            usoHabilidade = input(f'Quer usar sua habilidade {habilidadeClasse} 1 para sim 2 para não: ')
+        if classe == 'Guerreiro' and habilidadeClasse == 'fúria' and usoHabilidade == "1": #fúria
+
+            print(f'Você usou sua habilidade {habilidadeClasse}!')
+        elif classe == 'Guerreiro' and habilidadeClasse == 'golpe desleal' and usoHabilidade == "1": #golpe desleal funcional
+            vidaInimigo = vidaInimigo - 50
+            print(f'Você usou sua habilidade {habilidadeClasse}!')
+        elif classe == 'Guerreiro' and habilidadeClasse == 'revigorância' and usoHabilidade == "1": #revigorância funcional
+            vidaMax = vidaMax + 40
+            print(f'Você usou sua habilidade {habilidadeClasse}!')
+        #MAGO
+        elif classe == 'Mago' and habilidadeClasse == 'bola de fogo' and usoHabilidade == "1": #bola de fogo funcional
+            vidaInimigo = vidaInimigo - (100 * defesaMagicaInimigo)
+            print(f'Você usou sua habilidade {habilidadeClasse}!')
+        elif classe == 'Mago' and habilidadeClasse == 'raio' and usoHabilidade == "1": #raio funcional
+            vidaInimigo = vidaInimigo - 40
+            atordoamento = '1'
+            print(f'Você usou sua habilidade {habilidadeClasse}!')
+        elif classe == 'Mago' and habilidadeClasse == 'véu mágico' and usoHabilidade == "1": #véu mágico
+            print(f'Você usou sua habilidade {habilidadeClasse}!')
+        #LADINO
+        elif classe == 'Ladino' and habilidadeClasse == 'roubo' and usoHabilidade == "1": #roubo funcional
+            vidaInimigo = vidaInimigo - 20
+            vidaMax = vidaMax + 20
+            print(f'Você usou sua habilidade {habilidadeClasse}!')
+        elif classe == 'Ladino' and habilidadeClasse == 'astúcia' and usoHabilidade == "1": #astúcia
+            print(f'Você usou sua habilidade {habilidadeClasse}!')
+        elif classe == 'Ladino' and habilidadeClasse == 'ataque surpresa': #ataque surpresa funcional
+            vidaInimigo = vidaInimigo - 60
+            print(f'Você usou sua habilidade {habilidadeClasse}!')
+
+        if usoHabilidade == "1":
+            contadorHabilidade = 0 #define o contadorHabilidade como 0
+        else:
+            contadorHabilidade == 5
 
     if equipamento == 'bastão':
         chanceAtordoar = random.randint(1,4)
@@ -242,6 +283,10 @@ while vidaInimigo >= 0 and vidaMax >= 0:
     print(f'Fim do {turno} turno!')
     turno = turno + 1
     acao = 'undefined' #define a variável acao como indefinido
+    atordoamento = '0'
+    contadorHabilidade = contadorHabilidade + 1 #aumento o contador da habilidade em 1
+    usoHabilidade = '3' #define usoHabilidade como 3
+    print(f'contador habilidade em {contadorHabilidade}')
 
 if vidaMax > vidaInimigo:
     print("Você ganhou!")
