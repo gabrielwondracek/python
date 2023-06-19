@@ -188,7 +188,7 @@ print("Começo da batalha!")
 while vidaInimigo >= 0 and vidaMax >= 0:
     bloqueio = '0'#define o bloqueio como 0
 
-    if contadorHabilidade == 5:
+    if contadorHabilidade >= 5:
         while usoHabilidade != '1' and usoHabilidade != '2':
             usoHabilidade = input(f'Quer usar sua habilidade {habilidadeClasse} 1 para sim 2 para não: ')
         if classe == 'Guerreiro' and habilidadeClasse == 'fúria' and usoHabilidade == "1": #fúria
@@ -221,10 +221,8 @@ while vidaInimigo >= 0 and vidaMax >= 0:
             vidaInimigo = vidaInimigo - 60
             print(f'Você usou sua habilidade {habilidadeClasse}!')
 
-        if usoHabilidade == "1":
+        if usoHabilidade == '1':
             contadorHabilidade = 0 #define o contadorHabilidade como 0
-        else:
-            contadorHabilidade == 5
 
     if equipamento == 'bastão':
         chanceAtordoar = random.randint(1,4)
