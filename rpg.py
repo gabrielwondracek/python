@@ -183,16 +183,21 @@ turno = 1 #define o turno inicial como 1
 acao = 'undefined' #define a variável acao como indefinido
 usoHabilidade = 'undefined' #define a variável usoHabilidade como indefinido
 chanceDeCritar = 0 #define a variável chanceDeCritar como indefinido
-contadorHabilidade = 5
+contadorHabilidade = 5 #define a variável contadorHabilidade como 5
+contadorFuria = 5 #define a variável contadorFuria como 5
+
 print("Começo da batalha!")
+
 while vidaInimigo >= 0 and vidaMax >= 0:
     bloqueio = '0'#define o bloqueio como 0
 
     if contadorHabilidade >= 5:
         while usoHabilidade != '1' and usoHabilidade != '2':
             usoHabilidade = input(f'Quer usar sua habilidade {habilidadeClasse} 1 para sim 2 para não: ')
-        if classe == 'Guerreiro' and habilidadeClasse == 'fúria' and usoHabilidade == "1": #fúria
-
+        if classe == 'Guerreiro' and habilidadeClasse == 'fúria' and usoHabilidade == "1": #fúria funcional
+            contadorFuria = 0
+            if contadorFuria <= 4: #contador da fúria
+                danoExtraFisico = danoFisico * 1.5
             print(f'Você usou sua habilidade {habilidadeClasse}!')
         elif classe == 'Guerreiro' and habilidadeClasse == 'golpe desleal' and usoHabilidade == "1": #golpe desleal funcional
             vidaInimigo = vidaInimigo - 50
@@ -223,6 +228,10 @@ while vidaInimigo >= 0 and vidaMax >= 0:
 
         if usoHabilidade == '1':
             contadorHabilidade = 0 #define o contadorHabilidade como 0
+
+    if contadorFuria < 4:
+        contadorFuria = contadorFuria + 1
+        print(f'você está enfurecido a {contadorFuria}')
 
     if equipamento == 'bastão':
         chanceAtordoar = random.randint(1,4)
@@ -255,8 +264,12 @@ while vidaInimigo >= 0 and vidaMax >= 0:
             print("BLOQUEIO FALHOU")
     #ATAQUE RÁPIDO
     elif acao == '2':
-        vidaInimigo = (vidaInimigo - (danoFisico * defesaFisicaInimigo)) - danoMagico * defesaMagicaInimigo
-        print("ATAQUE RÁPIDO!!!!") 
+        if contadorFuria < 4:#verifica se a fúria está ativa
+            vidaInimigo = (vidaInimigo - (danoExtraFisico * defesaFisicaInimigo)) - danoMagico * defesaMagicaInimigo
+            print("ATAQUE RÁPIDO ENFURECIDO!!!!")
+        else:
+            vidaInimigo = (vidaInimigo - (danoFisico * defesaFisicaInimigo)) - danoMagico * defesaMagicaInimigo
+            print("ATAQUE RÁPIDO!!!!") 
     #ATAQUE CARREGADO
     elif acao == '3':
         chanceAcertoCarregado = random.randint(1,3)
