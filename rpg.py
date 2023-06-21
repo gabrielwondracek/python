@@ -274,8 +274,12 @@ while vidaInimigo >= 0 and vidaMax >= 0:
     elif acao == '3':
         chanceAcertoCarregado = random.randint(1,3)
         if chanceAcertoCarregado == 1:
-            vidaInimigo = (vidaInimigo - ((danoFisico * 2) * defesaFisicaInimigo)) - (danoMagico * 2) * defesaMagicaInimigo
-            print("ATAQUE CARREGADO ACERTOU!!!!")
+            if contadorFuria < 4:#verifica se a fúria está ativa
+                vidaInimigo = (vidaInimigo - (danoExtraFisico * defesaFisicaInimigo)) - danoMagico * defesaMagicaInimigo
+                print("ATAQUE RÁPIDO ENFURECIDO!!!!")
+            else:
+                vidaInimigo = (vidaInimigo - ((danoFisico * 2) * defesaFisicaInimigo)) - (danoMagico * 2) * defesaMagicaInimigo
+                print("ATAQUE CARREGADO ACERTOU!!!!")
         else:
             print("ATAQUE CARREGADO FALHOU!!!!")
 
